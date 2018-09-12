@@ -15,6 +15,9 @@ define_keymap(re.compile("Firefox|Chromium"), {
     # /
     K("C-Left_Brace"): [K("C-Slash"), set_mark(False)],
 
+    # \
+    K("C-Backslash"): escape_next_key,
+
     # a
     K("C-a"): with_mark(K("Home")),
 
@@ -53,8 +56,10 @@ define_keymap(re.compile("Firefox|Chromium"), {
 
     # x
     K("C-b"): {
-        K("j"): [K("C-Home"), K("C-a"), set_mark(True)],
+        # g
         K("C-u"): pass_through_key,
+        # h
+        K("j"): [K("C-Home"), K("C-a"), set_mark(True)],
     },
 
     # b
