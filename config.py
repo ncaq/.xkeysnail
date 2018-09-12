@@ -1,6 +1,10 @@
 import re
 from xkeysnail.transform import *
 
+define_modmap({
+    Key.CAPSLOCK: Key.LEFT_CTRL
+})
+
 define_keymap(re.compile("Firefox|Chromium"), {
     # g
     K("C-u"): [K("ESC"), set_mark(False)],
