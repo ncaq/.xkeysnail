@@ -24,6 +24,9 @@ define_keymap(re.compile("Firefox|Chromium"), {
     # e
     K("C-d"): with_mark(K("End")),
 
+    # u
+    K("C-f"): [K("Home"), K("Shift-End"), K("C-b"), set_mark(False)],
+
     # d
     K("C-h"): [K("Delete"), set_mark(False)],
     K("M-h"): [K("C-Delete"), set_mark(False)],
@@ -44,6 +47,9 @@ define_keymap(re.compile("Firefox|Chromium"), {
 
     # q
     K("C-x"): K("C-comma"),
+
+    # k
+    K("C-v"): [K("Shift-End"), K("C-b"), set_mark(False)],
 
     # x
     K("C-b"): {
