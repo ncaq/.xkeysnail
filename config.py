@@ -23,6 +23,7 @@ define_keymap(re.compile("Firefox|Chromium"), {
 
     # o
     K("C-s"): K("C-k"),
+    K("M-s"): K("C-Shift-k"),
 
     # e
     K("C-d"): with_mark(K("End")),
