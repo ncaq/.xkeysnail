@@ -77,3 +77,8 @@ define_keymap(re.compile("Firefox|Chromium"), {
     K("C-space"): set_mark(True),
     K("Shift-C-space"): set_mark(True),
 }, "Firefox and Chromium")
+
+define_keymap(re.compile("Evince"), {
+    # t
+    K("k"): K("r"),
+}, "Evince")
