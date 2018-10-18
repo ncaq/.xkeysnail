@@ -25,6 +25,9 @@ define_keymap(re.compile("Firefox|Chromium|Slack|discord"), {
     K("C-s"): K("C-k"),
     K("M-s"): K("C-Shift-k"),
 
+    # -
+    K("M-Apostrophe"): K("C-Shift-k"),
+
     # e
     K("C-d"): with_mark(K("End")),
 
