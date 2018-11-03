@@ -5,7 +5,7 @@ define_modmap({
     Key.CAPSLOCK: Key.LEFT_CTRL
 })
 
-define_keymap(re.compile("Firefox|Chromium|Slack|discord"), {
+define_keymap(re.compile("Firefox|Chromium|Thunderbird|Slack|discord"), {
     # g
     K("C-u"): [K("ESC"), set_mark(False)],
 
