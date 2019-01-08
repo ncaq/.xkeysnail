@@ -82,6 +82,15 @@ define_keymap(re.compile("Firefox|Chromium|Thunderbird|Slack|discord|copyq"), {
     K("Shift-C-space"): set_mark(True),
 }, "Web based Application")
 
+define_keymap(re.compile("Slack|discord"), {
+    # j
+    K("M-c"): [K("M-Down")],
+    K("C-M-c"): [K("C-M-Down")],
+    # k
+    K("M-v"): [K("M-Up")],
+    K("C-M-v"): [K("C-M-Up")],
+}, "Slack and Discord switch channel")
+
 define_keymap(re.compile("Evince"), {
     # t
     K("k"): K("r"),
