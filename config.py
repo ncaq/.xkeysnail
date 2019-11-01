@@ -94,4 +94,6 @@ define_keymap(re.compile("Slack|discord"), {
 define_keymap(re.compile("Evince"), {
     # t
     K("k"): K("r"),
+    # p
+    K("r"): K("k"),
 }, "Evince")
