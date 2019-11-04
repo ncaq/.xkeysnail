@@ -97,3 +97,10 @@ define_keymap(re.compile("Evince"), {
     # p
     K("r"): K("k"),
 }, "Evince")
+
+define_keymap(re.compile("XCOM2"), {
+    # ,
+    K("w"): K("COMMA"),
+    # .
+    K("e"): K("DOT"),
+}, "XCOM2のWとEが謎の動作をするのを修正")
