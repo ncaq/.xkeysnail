@@ -5,7 +5,16 @@ define_modmap({
     Key.CAPSLOCK: Key.LEFT_CTRL
 })
 
-define_keymap(re.compile("Firefox|Chromium|Thunderbird|Slack|discord|Skype|copyq"), {
+define_keymap(re.compile(
+    "Chromium|"
+    "Firefox|"
+    "Skype|"
+    "Slack|"
+    "Thunderbird|"
+    "copyq|"
+    "discord|"
+    "jetbrains-idea-ce"
+), {
     # g
     K("C-u"): [K("ESC"), set_mark(False)],
 
@@ -80,7 +89,7 @@ define_keymap(re.compile("Firefox|Chromium|Thunderbird|Slack|discord|Skype|copyq
     # space
     K("C-space"): set_mark(True),
     K("Shift-C-space"): set_mark(True),
-}, "Web based Application")
+}, "Web textarea like Application")
 
 define_keymap(re.compile("Slack|discord"), {
     # j
