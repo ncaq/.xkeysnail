@@ -8,6 +8,7 @@ define_modmap({
 define_keymap(re.compile(
     "Chromium|"
     "Firefox|"
+    "Jdim|"
     "Skype|"
     "Slack|"
     "Thunderbird|"
