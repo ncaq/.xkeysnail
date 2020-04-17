@@ -94,11 +94,11 @@ define_keymap(re.compile(
 
 define_keymap(re.compile("Slack|discord"), {
     # j
-    K("M-c"): [K("M-Down")],
-    K("C-M-c"): [K("C-M-Down")],
+    K("M-c"): [K("M-Shift-Down")],
+    K("C-M-c"): [K("M-Down")],
     # k
-    K("M-v"): [K("M-Up")],
-    K("C-M-v"): [K("C-M-Up")],
+    K("M-v"): [K("M-Shift-Up")],
+    K("C-M-v"): [K("M-Up")],
 }, "Slack and Discord switch channel")
 
 define_keymap(re.compile("Evince"), {
