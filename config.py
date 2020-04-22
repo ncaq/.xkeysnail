@@ -20,6 +20,22 @@ define_keymap(re.compile("discord"), {
     K("Enter"): [K("Enter"), set_mark(False)],
 }, "改行と投稿を統一する Discord")
 
+define_keymap(re.compile("Slack|discord"), {
+    # j
+    K("M-c"): [K("M-Shift-Down")],
+    K("C-M-c"): [K("M-Down")],
+    # k
+    K("M-v"): [K("M-Shift-Up")],
+    K("C-M-v"): [K("M-Up")],
+}, "Slack and Discord switch channel")
+
+define_keymap(re.compile("XCOM2"), {
+    # ,
+    K("w"): K("COMMA"),
+    # .
+    K("e"): K("DOT"),
+}, "XCOM2のWとEが謎の動作をするのを修正")
+
 define_keymap(re.compile(
     "Chromium|"
     "Firefox|"
@@ -106,19 +122,3 @@ define_keymap(re.compile(
     K("C-space"): set_mark(True),
     K("Shift-C-space"): set_mark(True),
 }, "Web textarea like Application")
-
-define_keymap(re.compile("Slack|discord"), {
-    # j
-    K("M-c"): [K("M-Shift-Down")],
-    K("C-M-c"): [K("M-Down")],
-    # k
-    K("M-v"): [K("M-Shift-Up")],
-    K("C-M-v"): [K("M-Up")],
-}, "Slack and Discord switch channel")
-
-define_keymap(re.compile("XCOM2"), {
-    # ,
-    K("w"): K("COMMA"),
-    # .
-    K("e"): K("DOT"),
-}, "XCOM2のWとEが謎の動作をするのを修正")
