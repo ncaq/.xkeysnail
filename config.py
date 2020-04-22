@@ -21,12 +21,14 @@ define_keymap(re.compile("discord"), {
 }, "改行と投稿を統一する Discord")
 
 define_keymap(re.compile("Slack|discord"), {
+    # n
+    K("M-l"): [K("M-Shift-Down")],
+    # t
+    K("M-k"): [K("M-Shift-Up")],
     # j
-    K("M-c"): [K("M-Shift-Down")],
-    K("C-M-c"): [K("M-Down")],
+    K("M-c"): [K("M-Down")],
     # k
-    K("M-v"): [K("M-Shift-Up")],
-    K("C-M-v"): [K("M-Up")],
+    K("M-v"): [K("M-Up")],
 }, "Slack and Discord switch channel")
 
 define_keymap(re.compile("XCOM2"), {
