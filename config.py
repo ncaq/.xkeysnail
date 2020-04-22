@@ -11,7 +11,7 @@ define_keymap(re.compile("Skype|discord"), {
 }, "改行と投稿を統一する Skype and Discord")
 
 define_keymap(re.compile("Slack"), {
-    K("C-m"): [K("M-Enter"), set_mark(False)],
+    K("C-m"): [K("Shift-Enter"), set_mark(False)],
     K("Enter"): [K("Ctrl-Enter"), set_mark(False)],
 }, "改行と投稿を統一する Slack")
 
