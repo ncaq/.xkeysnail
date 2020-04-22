@@ -101,13 +101,6 @@ define_keymap(re.compile("Slack|discord"), {
     K("C-M-v"): [K("M-Up")],
 }, "Slack and Discord switch channel")
 
-define_keymap(re.compile("Evince"), {
-    # t
-    K("k"): K("r"),
-    # p
-    K("r"): K("k"),
-}, "Evince")
-
 define_keymap(re.compile("XCOM2"), {
     # ,
     K("w"): K("COMMA"),
