@@ -5,15 +5,15 @@ define_modmap({
     Key.CAPSLOCK: Key.LEFT_CTRL
 })
 
-define_keymap(re.compile("Skype|discord"), {
+define_keymap(re.compile("Mikutter.rb|Skype|discord"), {
     K("C-m"): [K("Shift-Enter"), set_mark(False)],
     K("Enter"): [K("Enter"), set_mark(False)],
-}, "改行と投稿を統一する Skype and Discord")
+}, "改行と投稿を統一する")
 
 define_keymap(re.compile("Slack"), {
     K("C-m"): [K("Shift-Enter"), set_mark(False)],
     K("Enter"): [K("Ctrl-Enter"), set_mark(False)],
-}, "改行と投稿を統一する Slack")
+}, "改行と投稿を統一する")
 
 define_keymap(re.compile("Slack|discord"), {
     # n
@@ -37,6 +37,7 @@ define_keymap(re.compile(
     "Chromium|"
     "Firefox|"
     "Jdim|"
+    "Mikutter.rb|"
     "Skype|"
     "Slack|"
     "Thunderbird|"
