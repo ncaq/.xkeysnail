@@ -26,6 +26,10 @@ define_keymap(re.compile("Slack|discord"), {
     K("M-v"): [K("M-Up")],
 }, "Slack and Discord switch channel")
 
+define_keymap(re.compile("Slack"), {
+    K("C-w"): K("MUHENKAN"),
+}, "C-,のショートカットを無効化しつつIMEオフを維持する")
+
 define_keymap(re.compile("XCOM2"), {
     # ,
     K("w"): K("COMMA"),
