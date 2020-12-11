@@ -16,14 +16,14 @@ define_keymap(re.compile("Slack"), {
 }, "改行と投稿を統一する")
 
 define_keymap(re.compile("Slack|discord"), {
-    # n
-    K("M-l"): [K("M-Shift-Down")],
-    # t
-    K("M-k"): [K("M-Shift-Up")],
     # j
-    K("M-c"): [K("M-Down")],
+    K("M-c"): [K("M-Shift-Down")],
     # k
-    K("M-v"): [K("M-Up")],
+    K("M-v"): [K("M-Shift-Up")],
+    # n
+    K("M-l"): [K("M-Down")],
+    # t
+    K("M-k"): [K("M-Up")],
 }, "Slack and Discord switch channel")
 
 define_keymap(re.compile("LilyTerm|Slack|discord"), {
