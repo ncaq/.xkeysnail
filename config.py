@@ -28,7 +28,8 @@ define_keymap(re.compile("Slack|discord"), {
 
 define_keymap(re.compile("LilyTerm|Slack|discord"), {
     K("C-w"): K("MUHENKAN"),
-}, "C-,のショートカットを無効化しつつIMEオフを維持する")
+    K("C-e"): K("HENKAN"),
+}, "C-,、C-.のショートカットを無効化する")
 
 define_keymap(re.compile("XCOM2"), {
     # ,
