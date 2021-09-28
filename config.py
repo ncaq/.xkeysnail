@@ -17,15 +17,19 @@ define_keymap(re.compile("Slack"), {
 }, "改行と投稿を統一する")
 
 define_keymap(re.compile("Slack|discord"), {
-    # j
+    # チャンネルスイッチのキーバインドを使いやすくします。
+    # j: 下に移動。
     K("M-c"): [K("M-Shift-Down")],
-    # k
+    # k: 上に移動。
     K("M-v"): [K("M-Shift-Up")],
-    # n
+    # n: 下の未読に移動。
     K("M-l"): [K("M-Down")],
-    # t
+    # t: 上の未読に移動。
     K("M-k"): [K("M-Up")],
-}, "Slack and Discord switch channel")
+
+    # r: 誤爆が多いため、C-rでのリロードは無効化。メニューから押します。
+    K("C-o"): [None]
+}, "Slack and Discord")
 
 define_keymap(re.compile("LilyTerm|Slack|discord"), {
     K("C-w"): K("MUHENKAN"),
