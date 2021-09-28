@@ -1,4 +1,5 @@
 import re
+
 from xkeysnail.transform import *
 
 define_modmap({
