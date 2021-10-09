@@ -26,9 +26,6 @@ define_keymap(re.compile("Slack|discord"), {
     K("M-l"): [K("M-Down")],
     # t: 上の未読に移動。
     K("M-k"): [K("M-Up")],
-
-    # r: 誤爆が多いため、C-rでのリロードは無効化。メニューから押します。
-    K("C-o"): [None]
 }, "Slack and Discord")
 
 define_keymap(re.compile("LilyTerm|Slack|discord"), {
