@@ -42,15 +42,15 @@ define_keymap(re.compile("XCOM2"), {
 
 define_keymap(re.compile(
     "Chromium|"
-    "Firefox|"
     "Jdim|"
     "Mikutter.rb|"
     "Skype|"
     "Slack|"
-    "Thunderbird|"
     "copyq|"
     "discord|"
-    "jetbrains-idea-ce"
+    "firefox|"
+    "jetbrains-idea-ce|"
+    "thunderbird"
 ), {
     # g
     K("C-u"): [K("ESC"), set_mark(False)],
