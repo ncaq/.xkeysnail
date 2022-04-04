@@ -46,11 +46,11 @@ define_keymap(re.compile(
     "Mikutter.rb|"
     "Skype|"
     "Slack|"
+    "Thunderbird|"
     "copyq|"
     "discord|"
     "firefox|"
-    "jetbrains-idea-ce|"
-    "thunderbird"
+    "jetbrains-idea-ce"
 ), {
     # g
     K("C-u"): [K("ESC"), set_mark(False)],
