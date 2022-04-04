@@ -60,16 +60,20 @@ define_keymap(
 
 define_keymap(
     re.compile(
-        "Chromium|"
-        "Jdim|"
-        "Mikutter.rb|"
-        "Skype|"
-        "Slack|"
-        "Thunderbird|"
-        "copyq|"
-        "discord|"
-        "firefox|"
-        "jetbrains-idea-ce"
+        "|".join(
+            [
+                "Chromium",
+                "Jdim",
+                "Mikutter.rb",
+                "Skype",
+                "Slack",
+                "Thunderbird",
+                "copyq",
+                "discord",
+                "firefox",
+                "jetbrains-idea-ce",
+            ]
+        )
     ),
     {
         # g
