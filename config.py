@@ -2,13 +2,75 @@ import re
 
 from xkeysnail.transform import *
 
+# 文字のリテラル表現と、xkeysnailで表現する特殊なキー表現の対応リスト。
+# [xkeysnail/key.py at master · mooz/xkeysnail · GitHub](https://github.com/mooz/xkeysnail/blob/master/xkeysnail/key.py)
+xkeysnail_literal_special_source = [
+    ("[", "left_brace"),
+    ("]", "right_brace"),
+    ("\\", "backslash"),
+    ("`", "grave"),
+    ("'", "apostrophe"),
+    (",", "comma"),
+    (".", "dot"),
+    ("/", "slash"),
+    ("-", "minus"),
+    (";", "semicolon"),
+]
+
+
+def xkeysnail_literal_special(literal: str):
+    """リテラル表現をxkeysnailの表現に変換する。"""
+    return next(
+        (t[1] for t in xkeysnail_literal_special_source if t[0] == literal), None
+    )
+
+
+def xkeysnail_special_literal(special: str):
+    """xkeysnailの表現をリテラル表現に変換する。"""
+    return next(
+        (t[0] for t in xkeysnail_literal_special_source if t[1] == special), None
+    )
+
+
+# USキーボードでDvorakとQwertyで差分が生じそうなリスト。
+# リテラル表現。
+dvorak = "[]\\`',.pyfgcrl/=aoeuidhtns-;qjkxbmwvz"
+qwerty = "-=\\`qwertyuiop[]asdfghjkl;'zxcvbnm,./"
+
+
+def d2q(key: str) -> str:
+    """
+    Dvorak to Qwerty.
+    """
+    literal = xkeysnail_special_literal(key) or key
+    try:
+        i = dvorak.index(literal)
+        q = qwerty[i]
+        return xkeysnail_literal_special(q) or q
+    except ValueError:
+        return key
+
+
+def D(exp: str):
+    """`K`がDvorak設定を無視するので設定側で入れ替えする。"""
+    t = exp.rsplit("-", 1)
+    print(t)
+    if len(t) == 2:
+        # "C-w"や"C-Shift-w"を正常に分割出来れば長さは2となる。
+        [prefix, key] = t
+        return K(f"{prefix}-{d2q(key)}")
+    else:
+        # 分割できていない場合単体でキーバインドを指すことが多いため分割せず変換する。
+        return K(d2q(exp))
+
+
 define_modmap({Key.CAPSLOCK: Key.LEFT_CTRL})
 
 define_keymap(
     re.compile("Mikutter.rb|Skype|discord"),
     {
-        K("C-m"): [K("Shift-Enter"), set_mark(False)],
-        K("Enter"): [K("Enter"), set_mark(False)],
+        D("C-m"): [D("Shift-enter"), set_mark(False)],
+        D("enter"): [D("enter"), set_mark(False)],
     },
     "改行と投稿を統一する",
 )
@@ -16,8 +78,8 @@ define_keymap(
 define_keymap(
     re.compile("Slack"),
     {
-        K("C-m"): [K("Enter"), set_mark(False)],
-        K("Enter"): [K("Ctrl-Enter"), set_mark(False)],
+        D("C-m"): [D("enter"), set_mark(False)],
+        D("enter"): [D("Ctrl-enter"), set_mark(False)],
     },
     "改行と投稿を統一する",
 )
@@ -26,14 +88,14 @@ define_keymap(
     re.compile("Slack|discord"),
     {
         # チャンネルスイッチのキーバインドを使いやすくします。
-        # j: 下に移動。
-        K("M-c"): [K("M-Shift-Down")],
-        # k: 上に移動。
-        K("M-v"): [K("M-Shift-Up")],
-        # n: 下の未読に移動。
-        K("M-l"): [K("M-Down")],
-        # t: 上の未読に移動。
-        K("M-k"): [K("M-Up")],
+        # 下に移動。
+        D("M-j"): [D("M-Shift-down")],
+        # 上に移動。
+        D("M-k"): [D("M-Shift-up")],
+        # 下の未読に移動。
+        D("M-n"): [D("M-down")],
+        # 上の未読に移動。
+        D("M-t"): [D("M-up")],
     },
     "Slack and Discord",
 )
@@ -41,21 +103,10 @@ define_keymap(
 define_keymap(
     re.compile("LilyTerm|Slack|discord"),
     {
-        K("C-w"): K("MUHENKAN"),
-        K("C-e"): K("HENKAN"),
+        D("C-comma"): D("muhenkan"),
+        D("C-dot"): D("henkan"),
     },
     "`C-,`, `C-.`のショートカットを無効化する",
-)
-
-define_keymap(
-    re.compile("XCOM2"),
-    {
-        # ,
-        K("w"): K("COMMA"),
-        # .
-        K("e"): K("DOT"),
-    },
-    "XCOM2のWとEが謎の動作をするのを修正",
 )
 
 define_keymap(
@@ -76,60 +127,37 @@ define_keymap(
         )
     ),
     {
-        # g
-        K("C-u"): [K("ESC"), set_mark(False)],
-        # y
-        K("C-t"): [K("C-Dot"), set_mark(False)],
-        # /
-        K("C-Left_Brace"): [K("C-Slash"), set_mark(False)],
-        # \
-        K("C-Backslash"): escape_next_key,
-        # a
-        K("C-a"): with_mark(K("Home")),
-        # o
-        K("C-s"): K("C-k"),
-        K("M-s"): K("C-Shift-k"),
-        # -
-        K("M-Apostrophe"): K("C-Shift-k"),
-        # e
-        K("C-d"): with_mark(K("End")),
-        # u
-        K("C-f"): [K("Home"), K("Shift-End"), K("C-b"), set_mark(False)],
-        # d
-        K("C-h"): [K("Delete"), set_mark(False)],
-        K("M-h"): [K("C-Delete"), set_mark(False)],
-        # h
-        K("C-j"): with_mark(K("Left")),
-        K("M-j"): with_mark(K("C-Left")),
-        # s
-        K("C-Semicolon"): with_mark(K("Right")),
-        K("M-Semicolon"): with_mark(K("C-Right")),
-        # t
-        K("C-k"): with_mark(K("Up")),
-        # n
-        K("C-l"): with_mark(K("Down")),
-        # q
-        K("C-x"): K("C-comma"),
-        # k
-        K("C-v"): [K("Shift-End"), K("C-b"), set_mark(False)],
-        # x
-        K("C-b"): {
-            # g
-            K("C-u"): pass_through_key,
-            # h
-            K("j"): [K("C-Home"), K("C-a"), set_mark(True)],
+        D("C-g"): [D("esc"), set_mark(False)],
+        D("C-y"): [D("C-v"), set_mark(False)],
+        D("C-slash"): [D("C-z"), set_mark(False)],
+        D("C-backslash"): escape_next_key,
+        D("C-a"): with_mark(D("home")),
+        D("C-o"): D("C-t"),
+        D("M-o"): D("C-Shift-t"),
+        D("M-minus"): D("C-Shift-t"),
+        D("C-e"): with_mark(D("end")),
+        D("C-u"): [D("home"), D("Shift-end"), D("C-x"), set_mark(False)],
+        D("C-d"): [D("delete"), set_mark(False)],
+        D("M-d"): [D("C-delete"), set_mark(False)],
+        D("C-h"): with_mark(D("left")),
+        D("M-h"): with_mark(D("C-left")),
+        D("C-s"): with_mark(D("right")),
+        D("M-s"): with_mark(D("C-right")),
+        D("C-t"): with_mark(D("up")),
+        D("C-n"): with_mark(D("down")),
+        D("C-q"): D("C-w"),
+        D("C-k"): [D("Shift-end"), D("C-x"), set_mark(False)],
+        D("C-x"): {
+            D("C-g"): pass_through_key,
+            D("h"): [D("C-home"), D("C-a"), set_mark(True)],
         },
-        # b
-        K("C-n"): [K("Backspace"), set_mark(False)],
-        K("M-n"): [K("C-Backspace"), set_mark(False)],
-        # m
-        K("C-m"): [K("Enter"), set_mark(False)],
-        # w
-        K("C-comma"): [K("C-b"), set_mark(False)],
-        K("M-comma"): [K("C-i"), set_mark(False)],
-        # space
-        K("C-space"): set_mark(True),
-        K("Shift-C-space"): set_mark(True),
+        D("C-b"): [D("backspace"), set_mark(False)],
+        D("M-b"): [D("C-backspace"), set_mark(False)],
+        D("C-m"): [D("enter"), set_mark(False)],
+        D("C-w"): [D("C-x"), set_mark(False)],
+        D("M-w"): [D("C-c"), set_mark(False)],
+        D("C-space"): set_mark(True),
+        D("C-Shift-space"): set_mark(True),
     },
     "Web textarea like Application",
 )
