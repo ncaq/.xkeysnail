@@ -101,7 +101,7 @@ define_keymap(
 )
 
 define_keymap(
-    re.compile("LilyTerm|Slack|discord"),
+    re.compile("Slack|discord|kitty"),
     {
         D("C-comma"): D("muhenkan"),
         D("C-dot"): D("henkan"),
