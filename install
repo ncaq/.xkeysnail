@@ -1,0 +1,8 @@
+#!/bin/zsh
+set -eux
+
+project_dir=${0:a:h}
+
+cd ~/.config/systemd/user/
+
+sudo ln -sfv $(realpath --relative-to=. $project_dir/xkeysnail.service) .
