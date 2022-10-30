@@ -118,11 +118,11 @@ define_keymap(
                 "Mikutter.rb",
                 "Skype",
                 "Slack",
-                "Thunderbird",
                 "copyq",
                 "discord",
                 "firefox",
                 "jetbrains-idea-ce",
+                "thunderbird",
             ]
         )
     ),
