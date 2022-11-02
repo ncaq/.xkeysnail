@@ -136,7 +136,7 @@ define_keymap(
         D("M-o"): D("C-Shift-t"),
         D("M-minus"): D("C-Shift-t"),
         D("C-e"): with_mark(D("end")),
-        D("C-u"): [D("home"), D("Shift-end"), D("C-x"), set_mark(False)],
+        D("C-u"): [D("home"), D("Shift-end"), D("C-x"), set_mark(False), D("delete")],
         D("C-d"): [D("delete"), set_mark(False)],
         D("M-d"): [D("C-delete"), set_mark(False)],
         D("C-h"): with_mark(D("left")),
