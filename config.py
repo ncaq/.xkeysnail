@@ -54,7 +54,6 @@ def d2q(key: str) -> str:
 def D(exp: str):
     """`K`がDvorak設定を無視するので設定側で入れ替えする。"""
     t = exp.rsplit("-", 1)
-    print(t)
     if len(t) == 2:
         # "C-w"や"C-Shift-w"を正常に分割出来れば長さは2となる。
         [prefix, key] = t
