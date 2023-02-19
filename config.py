@@ -2,9 +2,7 @@ import re
 
 from xkeysnail.transform import *
 
-# 文字のリテラル表現と、xkeysnailで表現する特殊なキー表現の対応リスト。
-# [xkeysnail/key.py at master · mooz/xkeysnail · GitHub](https://github.com/mooz/xkeysnail/blob/master/xkeysnail/key.py)
-xkeysnail_literal_special_source = [
+xkeysnail_literal_special_source: list[tuple[str, str]] = [
     ("[", "left_brace"),
     ("]", "right_brace"),
     ("\\", "backslash"),
@@ -16,26 +14,34 @@ xkeysnail_literal_special_source = [
     ("-", "minus"),
     (";", "semicolon"),
 ]
+"""
+文字のリテラル表現と、xkeysnailで表現する特殊なキー表現の対応リスト。
+[xkeysnail/key.py at master · mooz/xkeysnail · GitHub](https://github.com/mooz/xkeysnail/blob/master/xkeysnail/key.py)
+"""
 
 
-def xkeysnail_literal_special(literal: str):
+def xkeysnail_literal_special(literal: str) -> str | None:
     """リテラル表現をxkeysnailの表現に変換する。"""
     return next(
         (t[1] for t in xkeysnail_literal_special_source if t[0] == literal), None
     )
 
 
-def xkeysnail_special_literal(special: str):
+def xkeysnail_special_literal(special: str) -> str | None:
     """xkeysnailの表現をリテラル表現に変換する。"""
     return next(
         (t[0] for t in xkeysnail_literal_special_source if t[1] == special), None
     )
 
 
-# USキーボードでDvorakとQwertyで差分が生じそうなリスト。
-# リテラル表現。
-dvorak = "[]\\`',.pyfgcrl/=aoeuidhtns-;qjkxbmwvz"
-qwerty = "-=\\`qwertyuiop[]asdfghjkl;'zxcvbnm,./"
+dvorak: str = "[]\\`',.pyfgcrl/=aoeuidhtns-;qjkxbmwvz"
+"""
+USキーボードでDvorakとQwertyで差分が生じる範囲のDvorak側の文字配列。
+"""
+qwerty: str = "-=\\`qwertyuiop[]asdfghjkl;'zxcvbnm,./"
+"""
+USキーボードでDvorakとQwertyで差分が生じる範囲のQwerty側の文字配列。
+"""
 
 
 def d2q(key: str) -> str:
@@ -51,8 +57,9 @@ def d2q(key: str) -> str:
         return key
 
 
-def D(exp: str):
+def D(exp: str) -> Combo:
     """`K`がDvorak設定を無視するので設定側で入れ替えする。"""
+    # 末尾の`-`で分割して本物のキーだけを取り出す。
     t = exp.rsplit("-", 1)
     if len(t) == 2:
         # "C-w"や"C-Shift-w"を正常に分割出来れば長さは2となる。
