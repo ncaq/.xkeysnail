@@ -59,15 +59,14 @@ def d2q(key: str) -> str:
 
 def D(exp: str) -> Combo:
     """`K`がDvorak設定を無視するので設定側で入れ替えする。"""
-    # 末尾の`-`で分割して本物のキーだけを取り出す。
-    t = exp.rsplit("-", 1)
-    if len(t) == 2:
+    # 末尾の`-`で分割してプレフィクスと単体のキーを取り出す。
+    match exp.rsplit("-", 1):
         # "C-w"や"C-Shift-w"を正常に分割出来れば長さは2となる。
-        [prefix, key] = t
-        return K(f"{prefix}-{d2q(key)}")
-    else:
-        # 分割できていない場合単体でキーバインドを指すことが多いため分割せず変換する。
-        return K(d2q(exp))
+        case [prefix, key]:
+            return K(f"{prefix}-{d2q(key)}")
+        case _:
+            # 分割できていない場合単体でキーバインドを指すことが多いため分割せず変換する。
+            return K(d2q(exp))
 
 
 define_modmap({Key.CAPSLOCK: Key.LEFT_CTRL})
