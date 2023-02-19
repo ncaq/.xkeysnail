@@ -1,6 +1,16 @@
 import re
 
-from xkeysnail.transform import *
+from xkeysnail.transform import (
+    Combo,
+    K,
+    Key,
+    define_keymap,
+    define_modmap,
+    escape_next_key,
+    pass_through_key,
+    set_mark,
+    with_mark,
+)
 
 xkeysnail_literal_special_source: list[tuple[str, str]] = [
     ("[", "left_brace"),
