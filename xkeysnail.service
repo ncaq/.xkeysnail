@@ -2,7 +2,7 @@
 Description=xkeysnail
 
 [Service]
-ExecStart=/usr/bin/xkeysnail --quiet /home/ncaq/.xkeysnail/config.py
+ExecStart=/usr/bin/xkeysnail --quiet %h/.xkeysnail/config.py
 Environment=DISPLAY=:0
 
 [Install]
