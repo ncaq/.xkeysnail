@@ -2,8 +2,11 @@
 Description=xkeysnail
 
 [Service]
+# デバイスが初期化される前に起動してエラーになることへのワークアラウンド。
+ExecStartPre=sleep 1
+Restart=on-failure
 ExecStart=/usr/bin/xkeysnail --quiet %h/.xkeysnail/config.py
 Environment=DISPLAY=:0
 
 [Install]
-WantedBy=graphical.target
+WantedBy=default.target
