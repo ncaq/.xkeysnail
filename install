@@ -4,7 +4,7 @@ set -eux
 project_dir=${0:a:h}
 
 cd /etc/udev/rules.d/
-sudo ln -sfv $(realpath --relative-to=. $project_dir/99-uinput.rules) .
+sudo cp $(realpath --relative-to=. $project_dir/99-uinput.rules) .
 
 mkdir -p ~/.config/systemd/user/
 cd ~/.config/systemd/user/
