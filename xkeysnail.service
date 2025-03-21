@@ -7,6 +7,7 @@ ExecStartPre=sleep 1
 Restart=on-failure
 ExecStart=/usr/bin/xkeysnail --quiet %h/.xkeysnail/config.py
 Environment=DISPLAY=:0
+Environment=PATH=/usr/bin
 
 [Install]
 WantedBy=default.target
