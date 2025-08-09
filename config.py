@@ -82,7 +82,7 @@ def D(exp: str) -> Combo:
 define_modmap({Key.CAPSLOCK: Key.LEFT_CTRL})
 
 define_keymap(
-    re.compile("LM Studio|Mikutter.rb|Skype|discord"),
+    re.compile("Claude|LM Studio|Mikutter.rb|Skype|discord"),
     {
         D("C-m"): [D("Shift-enter"), set_mark(False)],
         D("enter"): [D("enter"), set_mark(False)],
@@ -116,7 +116,7 @@ define_keymap(
 )
 
 define_keymap(
-    re.compile("LM Studio|Slack|discord|kitty"),
+    re.compile("Claude|LM Studio|Slack|discord|kitty"),
     {
         D("C-comma"): D("muhenkan"),
         D("C-dot"): D("henkan"),
@@ -125,10 +125,19 @@ define_keymap(
 )
 
 define_keymap(
+    re.compile("Claude"),
+    {
+        D("C-o"): D("C-k"),
+    },
+    "新規チャットのショートカット",
+)
+
+define_keymap(
     re.compile(
         "|".join(
             [
                 "Chromium",
+                "Claude",
                 "Jdim",
                 "LM Studio",
                 "Mikutter.rb",
@@ -138,7 +147,7 @@ define_keymap(
                 "discord",
                 "firefox",
                 "jetbrains-idea-ce",
-                "thunderbird"
+                "thunderbird",
             ]
         )
     ),
